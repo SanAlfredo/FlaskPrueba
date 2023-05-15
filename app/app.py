@@ -8,10 +8,13 @@ app=Flask(__name__)
 @app.route('/')
 #funcion inicial para ejecutar
 def index():
-    #return "<h1>Hola mundo1!!</h1>"F
+    #return "<h1>Hola mundo1!!</h1>"
+    cursos=['Python','Java','JavaScript','C++']
     data={
         'titulo':'Index',
-        'bienvenido':'SALUDOS'
+        'bienvenido':'SALUDOS',
+        'cursos':cursos,
+        'numero_cursos':len(cursos)
     }
     return render_template('index.html',data=data)
 #si la aplicacion es main entonces correra
