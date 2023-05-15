@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primera pagina en flask</title>
-</head>
-<body>
-    <h1>HOLA DESDE LA PAGINA</h1>
+{% extends './layout.html' %}
+{% block title %} {{data.titulo}} {% endblock %}
+{% block body %}
+<h1>HOLA DESDE LA PAGINA</h1>
     <h2>{{data}}</h2>
     <h2>{{data.titulo}}</h2>
     {% if data.numero_cursos > 0 %}
@@ -19,5 +13,4 @@
     {% else %}
     <h2>No existen cursos ...</h2>
     {% endif %}
-</body>
-</html>
+{% endblock %}

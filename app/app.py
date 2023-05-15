@@ -11,7 +11,7 @@ def index():
     #return "<h1>Hola mundo1!!</h1>"
     cursos=['Python','Java','JavaScript','C++']
     data={
-        'titulo':'Index',
+        'titulo':'Primera app Flask',
         'bienvenido':'SALUDOS',
         'cursos':cursos,
         'numero_cursos':len(cursos)
