@@ -40,11 +40,27 @@ def query_string():
     print(request.args.get('param1'))
     return "ok"
 
+#configurar el error 404
+def pagina_no_encontrada(error):
+    return render_template('404.html'), 404
+    #tambien es posible enviar una redirecion al pagina principal
+    #return redirect(url_for('index'))
 
+#antes y despues de que se ejecute un request tambien podemos tener funciones que actuen
+@app.before_request
+def before_request():
+    print("antes de la peticion ...")
+
+@app.after_request
+def after_request(response):
+    print("despues de la peticion")
+    return response
 
 #si la aplicacion es main entonces correra
 if __name__=='__main__':
     #aqui llamamos al request
     app.add_url_rule('/query_string', view_func=query_string)
+    #manejador de errores
+    app.register_error_handler(404,pagina_no_encontrada)
     #es posible mandarle el modo debug
     app.run(debug=True)
