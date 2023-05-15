@@ -1,5 +1,5 @@
 #importar la libreria flask
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 #inicializamos la app
 app=Flask(__name__)
@@ -31,11 +31,20 @@ def contacto(nombre):
     }
     return render_template('contacto.html',data=data)
 
-
+#Ahora crearemos una request o algo que el cliente solicita al servidor
+#notar que no se le pone una url o ruta con @ como en las anteriores
+#ya que esta funcion se la llama desde main
+def query_string():
+    print(request)
+    print(request.args)
+    print(request.args.get('param1'))
+    return "ok"
 
 
 
 #si la aplicacion es main entonces correra
 if __name__=='__main__':
+    #aqui llamamos al request
+    app.add_url_rule('/query_string', view_func=query_string)
     #es posible mandarle el modo debug
     app.run(debug=True)
