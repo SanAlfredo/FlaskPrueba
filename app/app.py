@@ -1,8 +1,19 @@
 #importar la libreria flask
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for, redirect,jsonify
+
+#llamar la libreria para usar mysql
+from flask_mysqldb import MySQL
 
 #inicializamos la app
 app=Flask(__name__)
+
+#ahora iniciar la conexion Mysql
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'prueba1'
+
+conn = MySQL(app)
 
 #ruta inicial
 @app.route('/')
@@ -40,6 +51,20 @@ def query_string():
     print(request.args.get('param1'))
     return "ok"
 
+#nueva ruta que devuelve los datos de la base de datos
+@app.route('/personas')
+def listar_personas():
+    data={}
+    try:
+        cursor=conn.connection.cursor()
+        sql='SELECT * FROM personas'
+        cursor.execute(sql)
+        personas=cursor.fetchall()
+        data['personas']=personas
+        data['mensaje']='Exitoso'
+    except Exception as ex:
+        data['mensaje']='Error...'
+    return jsonify(data)
 #configurar el error 404
 def pagina_no_encontrada(error):
     return render_template('404.html'), 404
