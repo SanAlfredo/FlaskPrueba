@@ -17,6 +17,24 @@ def index():
         'numero_cursos':len(cursos)
     }
     return render_template('index.html',data=data)
+
+#url Dinamica que le metes un parametro nombre
+@app.route('/contacto/<nombre>')
+#hay que tomar en cuenta que los parametros y nombres de las def deben ser iguales a lo 
+#que se pone en la ruta para que no genere errores
+#entonces si quisieramos la edad def contacto (nombre,edad), mientras que la ruta seria
+#route ('/contacto/<nombre>/<int:edad>')
+def contacto(nombre):
+    data={
+        'titulo':'Contacto',
+        'nombre':nombre
+    }
+    return render_template('contacto.html',data=data)
+
+
+
+
+
 #si la aplicacion es main entonces correra
 if __name__=='__main__':
     #es posible mandarle el modo debug
